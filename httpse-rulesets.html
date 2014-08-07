@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>HTTPS-Everywhere Ruleset finder</title>
+      <style> a { display: block; } </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+      <script type='text/javascript'>
+        $.getJSON('https://api.github.com/repos/EFForg/https-everywhere/contents/src/chrome/content/rules', {},
+            function(files) {
+                var query = window.location.toString().split('?')[1];
+                $(files).each(function(idx, file) {
+                  if (file.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+                    var el = $('<a href="' + file.html_url + '">').text(file.name);
+                    $('body').append(el);
+                  }
+                });
+            }
+        );
+      </script>
+  </head>
+  <body> </body>
+</html>
